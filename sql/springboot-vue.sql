@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost_3306
+ Source Server         : test
  Source Server Type    : MySQL
- Source Server Version : 80023
+ Source Server Version : 80040 (8.0.40)
  Source Host           : localhost:3306
  Source Schema         : springboot-vue
 
  Target Server Type    : MySQL
- Target Server Version : 80023
+ Target Server Version : 80040 (8.0.40)
  File Encoding         : 65001
 
- Date: 18/04/2022 17:29:42
+ Date: 11/04/2025 15:48:58
 */
 
 SET NAMES utf8mb4;
@@ -22,17 +22,17 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `book`;
 CREATE TABLE `book`  (
-  `id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `isbn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '图书编号',
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '名称',
-  `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '价格',
-  `author` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '作者',
-  `publisher` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '出版社',
-  `create_time` date NULL DEFAULT NULL COMMENT '出版时间',
-  `status` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '0：未归还 1：已归还',
-  `borrownum` int(0) NOT NULL COMMENT '此书被借阅次数',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+                         `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+                         `isbn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '图书编号',
+                         `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '名称',
+                         `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '价格',
+                         `author` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '作者',
+                         `publisher` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '出版社',
+                         `create_time` date NULL DEFAULT NULL COMMENT '出版时间',
+                         `status` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '0：未归还 1：已归还',
+                         `borrownum` int NOT NULL COMMENT '此书被借阅次数',
+                         PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of book
@@ -49,16 +49,16 @@ INSERT INTO `book` VALUES (15, '54112312321', '格林童话', NULL, NULL, NULL, 
 -- ----------------------------
 DROP TABLE IF EXISTS `bookwithuser`;
 CREATE TABLE `bookwithuser`  (
-  `id` bigint(0) NOT NULL COMMENT '读者id',
-  `isbn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '图书编号',
-  `book_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '图书名',
-  `nick_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '读者姓名',
-  `lendtime` datetime(0) NULL DEFAULT NULL COMMENT '借阅时间',
-  `deadtime` datetime(0) NULL DEFAULT NULL COMMENT '应归还时间',
-  `prolong` int(0) NULL DEFAULT NULL COMMENT '续借次数',
-  PRIMARY KEY (`book_name`) USING BTREE,
-  INDEX `id`(`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+                                 `id` bigint NOT NULL COMMENT '读者id',
+                                 `isbn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '图书编号',
+                                 `book_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '图书名',
+                                 `nick_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '读者姓名',
+                                 `lendtime` datetime NULL DEFAULT NULL COMMENT '借阅时间',
+                                 `deadtime` datetime NULL DEFAULT NULL COMMENT '应归还时间',
+                                 `prolong` int NULL DEFAULT NULL COMMENT '续借次数',
+                                 PRIMARY KEY (`book_name`) USING BTREE,
+                                 INDEX `id`(`id` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bookwithuser
@@ -71,14 +71,14 @@ INSERT INTO `bookwithuser` VALUES (14, '3213123123', '操作系统', '123456', '
 -- ----------------------------
 DROP TABLE IF EXISTS `lend_record`;
 CREATE TABLE `lend_record`  (
-  `reader_id` bigint(0) NOT NULL COMMENT '读者id',
-  `isbn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '图书编号',
-  `bookname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '图书名',
-  `lend_time` datetime(0) NULL DEFAULT NULL COMMENT '借书日期',
-  `return_time` datetime(0) NULL DEFAULT NULL COMMENT '还书日期',
-  `status` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '0：未归还 1：已归还',
-  `borrownum` int(0) NOT NULL COMMENT '此书被借阅次数'
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+                                `reader_id` bigint NOT NULL COMMENT '读者id',
+                                `isbn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '图书编号',
+                                `bookname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '图书名',
+                                `lend_time` datetime NULL DEFAULT NULL COMMENT '借书日期',
+                                `return_time` datetime NULL DEFAULT NULL COMMENT '还书日期',
+                                `status` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '0：未归还 1：已归还',
+                                `borrownum` int NOT NULL COMMENT '此书被借阅次数'
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of lend_record
@@ -140,16 +140,19 @@ INSERT INTO `lend_record` VALUES (16, '12341541321', '十万个为什么', '2022
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '用户名',
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '密码',
-  `nick_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '姓名',
-  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '电话号码',
-  `sex` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '性别',
-  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '地址',
-  `role` int(0) NOT NULL COMMENT '角色、1：管理员 2：普通用户',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
+                         `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'ID',
+                         `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '用户名',
+                         `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '密码',
+                         `nick_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '姓名',
+                         `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '电话号码',
+                         `sex` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '性别',
+                         `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '地址',
+                         `role` int NOT NULL COMMENT '角色、1：管理员 2：普通用户',
+                         PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
 
+-- ----------------------------
+-- Records of user
+-- ----------------------------
 
-
+SET FOREIGN_KEY_CHECKS = 1;
